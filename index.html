@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google" content="notranslate">
+<title>네이버 11월 매출 SANTA 리그</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+:root{
+  --navy:#0a2038;
+  --navy2:#0e2c48;
+  --green:#14543a;
+  --green2:#1c7a52;
+  --gold:#d4af37;
+  --gold2:#f0d98c;
+  --gold3:#a8821f;
+  --cream:#f7eacb;
+  --cream2:#fdf6e6;
+  --ink:#16304d;
+  --red:#b02a2a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Pretendard',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  color:#f3e9d2;
+  background:
+    radial-gradient(ellipse 1200px 600px at 50% -10%, #15395c 0%, transparent 60%),
+    linear-gradient(180deg,#0b2240 0%,#0a1f3a 40%,#081a31 100%);
+  min-height:100vh;position:relative;overflow-x:hidden;
+}
+/* 눈 */
+.snow{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.snow i{
+  position:absolute;top:-12px;border-radius:50%;background:#fff;opacity:.55;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  0%{transform:translate3d(0,-12px,0) rotate(0)}
+  100%{transform:translate3d(18px,105vh,0) rotate(360deg)}
+}
+/* 코너 장식 */
+.corner{position:fixed;z-index:0;pointer-events:none;width:300px;opacity:.95}
+.corner.tl{top:-18px;left:-28px}
+.corner.tr{top:-18px;right:-28px;transform:scaleX(-1)}
+.corner.bl{bottom:-6px;left:14px;width:250px;opacity:1}
+.corner.br{bottom:-4px;right:16px;width:240px;opacity:1}
+
+/* 전구 가랜드 */
+.garland{position:fixed;top:0;left:0;width:100%;height:94px;z-index:0;pointer-events:none}
+.garland .bulb{animation:twinkle 2.4s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:1}50%{opacity:.35}}
+/* 눈송이 글리프 */
+.flake{position:fixed;z-index:0;pointer-events:none;color:#cfe6ff;opacity:.5;animation:drift2 linear infinite}
+@keyframes drift2{0%{transform:translate3d(0,-40px,0) rotate(0)}100%{transform:translate3d(30px,106vh,0) rotate(400deg)}}
+
+.wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:78px 20px 250px}
+
+/* 헤더 */
+header{text-align:center;padding:20px 24px 18px;background:#0c2440;border:1px solid rgba(212,175,55,.3);border-radius:20px;box-shadow:0 14px 34px rgba(0,0,0,.35)}
+.ribbon{
+  display:inline-flex;align-items:center;gap:14px;
+  font-size:13.5px;font-weight:700;letter-spacing:-.2px;color:var(--gold2);
+  margin-bottom:16px;
+}
+.ribbon::before,.ribbon::after{
+  content:'';width:54px;height:2px;background:linear-gradient(90deg,transparent,var(--gold));
+}
+.ribbon::after{background:linear-gradient(90deg,var(--gold),transparent)}
+h1{font-size:clamp(30px,5.6vw,60px);line-height:1.1;letter-spacing:-1.5px;font-weight:900;color:#fff}
+h1 .santa{
+  font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:700;
+  font-size:1.14em;letter-spacing:.5px;margin:0 .12em;
+}
+h1 .g{color:var(--gold);text-shadow:0 2px 0 rgba(0,0,0,.35)}
+h1 .n{color:#2ea36c;text-shadow:0 2px 0 rgba(0,0,0,.35)}
+.tagline{
+  margin-top:16px;display:flex;align-items:center;justify-content:center;gap:0;
+  flex-wrap:wrap;font-size:15px;font-weight:700;color:#e8dcc0;
+}
+.tagline .seg{padding:0 18px}
+.tagline .bar{width:1px;height:15px;background:rgba(212,175,55,.5)}
+.tagline b{color:var(--gold);font-weight:900;margin-right:5px;letter-spacing:.3px}
+
+/* 수상 방법 */
+.howto{
+  margin:24px auto 0;max-width:880px;
+  background:linear-gradient(180deg,#11462f,#0c2942);
+  border:1.5px solid var(--gold);border-radius:16px;padding:14px 20px;
+  display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;
+  box-shadow:0 10px 30px rgba(0,0,0,.35),inset 0 0 0 1px rgba(240,217,140,.18);
+}
+.howto .tag{
+  background:var(--gold);color:#3a2b05;font-size:12.5px;font-weight:900;
+  padding:7px 15px;border-radius:999px;flex:none;letter-spacing:-.2px;
+}
+.howto .body{font-size:16.5px;font-weight:800;color:#fff;letter-spacing:-.4px;text-align:center}
+.howto .body .hi{color:var(--gold2)}
+.howto .body .lead{display:inline-block;color:#fff;margin-right:10px;padding:3px 12px;border:1px solid rgba(212,175,55,.6);border-radius:999px;font-size:14.5px}
+.howto .body .brk{display:none}
+.howto .body .sl{margin:0 10px;color:rgba(212,175,55,.6)}
+.howto .body em{font-style:normal;color:#ff8f6b}
+
+/* 달성 현황 */
+.status-wrap{text-align:center}
+.status{
+  margin:22px auto 16px;background:#102c49;
+  border:1px solid rgba(212,175,55,.42);border-radius:18px;padding:17px 34px;
+  display:inline-flex;align-items:center;justify-content:center;gap:32px;flex-wrap:nowrap;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+.status .lab{font-size:12.5px;font-weight:800;color:#b9a985;margin-bottom:3px;white-space:nowrap}
+.status .val{
+  font-size:46px;font-weight:900;line-height:1;white-space:nowrap;letter-spacing:-2px;
+  background:linear-gradient(135deg,#f0d98c,#d4af37);-webkit-background-clip:text;
+  background-clip:text;color:transparent;
+}
+.status .upd{font-size:14px;color:#e2d6ba;font-weight:800;white-space:nowrap}
+.status .divider{width:1px;align-self:stretch;background:rgba(212,175,55,.3);margin:4px 0}
+.status .right{text-align:right}
+.note-wrap{text-align:center}
+.note-box{
+  display:inline-block;max-width:100%;margin:0 auto 24px;
+  background:#15375a;border-left:5px solid var(--gold);border-radius:12px;
+  padding:13px 24px;font-size:15px;font-weight:800;color:#f3e9d2;line-height:1.6;
+  letter-spacing:-.3px;word-break:keep-all;
+}
+
+/* 카드 */
+.section-title{
+  text-align:center;color:var(--gold2);font-size:19px;font-weight:900;text-shadow:0 2px 8px rgba(0,0,0,.8);
+  margin:18px 0 18px;letter-spacing:-.3px;
+  display:flex;align-items:center;justify-content:center;gap:14px;
+}
+.section-title::before,.section-title::after{
+  content:'';width:48px;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold));
+}
+.section-title::after{background:linear-gradient(90deg,var(--gold),transparent)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{
+  border-radius:18px;overflow:hidden;display:flex;flex-direction:column;
+  border:1.5px solid var(--gold);background:var(--navy2);
+  box-shadow:0 14px 34px rgba(0,0,0,.42);
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.card:hover{transform:translateY(-5px);box-shadow:0 20px 44px rgba(0,0,0,.55)}
+.card .head{
+  display:flex;align-items:center;gap:12px;padding:15px 16px;
+  background:linear-gradient(180deg,#113356,#0d2742);
+  border-bottom:1.5px solid var(--gold);
+}
+.card .ico{
+  width:38px;height:38px;flex:none;border-radius:10px;display:grid;place-items:center;
+  font-size:19px;background:#1a3e63;border:1px solid rgba(212,175,55,.5);
+}
+.card h2{font-size:17px;font-weight:900;letter-spacing:-.5px;color:#fff;line-height:1.25}
+.card .head p{margin-top:3px;font-size:11px;color:#b9a985;font-weight:600;letter-spacing:-.2px}
+.card .body{background:var(--cream);padding:6px 16px 14px}
+.prize{
+  display:flex;align-items:center;gap:14px;padding:13px 4px;
+  border-bottom:1px dashed rgba(168,130,31,.35);
+}
+.prize:last-child{border-bottom:0}
+.medal{font-size:32px;line-height:1;flex:none;width:44px;text-align:center;filter:drop-shadow(0 3px 5px rgba(90,60,10,.3))}
+.prize .amt{font-size:25px;font-weight:900;color:#1d2b3f;letter-spacing:-1px}
+.prize .split{margin-top:2px;font-size:11px;color:#8a7a56;font-weight:700}
+.prize .info{flex:1}
+
+/* 장식 디바이더 */
+.deco{
+  display:flex;align-items:center;justify-content:center;gap:16px;
+  margin:26px 0 2px;font-size:22px;line-height:1;
+}
+.deco::before,.deco::after{
+  content:'';flex:1;max-width:220px;height:1.5px;
+  background:linear-gradient(90deg,transparent,rgba(212,175,55,.65),transparent);
+}
+.deco span{animation:bobup 3s ease-in-out infinite}
+.deco span:nth-child(2){animation-delay:.4s}
+.deco span:nth-child(3){animation-delay:.8s}
+.deco span:nth-child(4){animation-delay:1.2s}
+.deco span:nth-child(5){animation-delay:1.6s}
+@keyframes bobup{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+/* 눈 쌓인 바닥 */
+.ground{
+  position:fixed;left:0;right:0;bottom:0;height:120px;z-index:0;pointer-events:none;
+}
+
+/* 하단 리본 */
+.xmas{
+  margin:26px 0 0;text-align:center;padding:20px;background:#0d2742;border-radius:14px;
+  border:1.5px solid rgba(212,175,55,.45);
+  font-size:clamp(17px,2.4vw,24px);font-weight:900;color:#fff;letter-spacing:-.6px;
+}
+.xmas .santa{font-family:Georgia,serif;font-style:italic;color:var(--gold);font-size:1.16em;margin-left:8px}
+.xmas .leafy{color:var(--green2);margin:0 8px}
+
+/* 조건 */
+.terms{margin-top:22px;border:1px solid rgba(212,175,55,.38);border-radius:16px;padding:18px 20px 20px;background:#0d2742}
+.terms .chips{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center;margin-bottom:16px}
+.terms .chips .lead{font-size:12.5px;font-weight:900;color:#2b2005;background:var(--gold);padding:6px 13px;border-radius:999px}
+.terms .chips .chip{
+  font-size:12.5px;font-weight:700;color:#e8dcc0;background:#153a5e;
+  border:1px solid rgba(212,175,55,.35);padding:6px 13px;border-radius:999px;
+}
+.tgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.titem{background:#123052;border:1px solid rgba(212,175,55,.3);border-radius:13px;padding:13px 15px}
+.titem .th{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.titem .th .ti{
+  width:26px;height:26px;flex:none;border-radius:8px;display:grid;place-items:center;
+  font-size:14px;background:#1a3e63;border:1px solid rgba(212,175,55,.45);
+}
+.titem .th b{font-size:13.5px;font-weight:900;color:var(--gold2);letter-spacing:-.3px}
+.titem ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.titem li{
+  position:relative;padding-left:14px;font-size:12.5px;line-height:1.6;
+  color:#dcd2bc;font-weight:600;letter-spacing:-.2px;word-break:keep-all;
+}
+.titem li::before{content:'';position:absolute;left:2px;top:7.5px;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+.titem li em{font-style:normal;color:#fff;font-weight:800}
+.titem li .hl{color:var(--gold2);font-weight:800}
+
+/* 순위 */
+.rank-wrap{margin-top:30px}
+.rank-box{background:#0d2742;border:1px solid rgba(212,175,55,.38);border-radius:18px;padding:22px;box-shadow:0 14px 34px rgba(0,0,0,.35)}
+.rank-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.rank-head h3{font-size:17px;font-weight:900;letter-spacing:-.4px;color:var(--gold2)}
+.rank-head .upd{font-size:12px;color:#b9a985;font-weight:700}
+.rank-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.rank-col{border:1px solid rgba(212,175,55,.4);border-radius:14px;overflow:hidden;background:var(--cream2)}
+.rc-head{display:flex;align-items:center;gap:10px;padding:12px 14px;color:#fff;font-size:13.5px;font-weight:900;letter-spacing:-.4px}
+.rc-head .rc-ico{width:28px;height:28px;border-radius:50%;background:#1a3e63;display:grid;place-items:center;font-size:14px;flex:none;border:1px solid rgba(240,217,140,.5)}
+.rc-head.h1,.rc-head.h2,.rc-head.h3{background:linear-gradient(135deg,#113356,#0d2742);border-bottom:1.5px solid var(--gold)}
+.rank-body{padding:6px 11px 11px}
+.rank-row{display:flex;align-items:center;gap:10px;padding:10px 4px;border-bottom:1px solid #efe4cd;font-size:13px}
+.rank-row:last-child{border-bottom:0}
+.tro{position:relative;width:34px;flex:none;text-align:center;line-height:1}
+.tro .ic{font-size:24px;display:block;filter:drop-shadow(0 2px 3px rgba(90,60,10,.3))}
+.tro .rk{position:absolute;left:50%;bottom:-4px;transform:translateX(-50%);min-width:16px;height:16px;padding:0 4px;border-radius:9px;font-size:10px;font-weight:900;color:#fff;display:grid;place-items:center;border:1.5px solid var(--cream2)}
+.rank-row.r1 .rk{background:linear-gradient(135deg,#f0d98c,#c9a227)}
+.rank-row.r2 .rk{background:linear-gradient(135deg,#cfd6dd,#9aa5b1)}
+.rank-row.r3 .rk{background:linear-gradient(135deg,#d9a273,#b9773f)}
+.rank-row.r1{background:linear-gradient(90deg,rgba(212,175,55,.16),transparent 62%);border-radius:9px}
+.rank-row.r2{background:linear-gradient(90deg,rgba(154,165,177,.14),transparent 62%);border-radius:9px}
+.rank-row.r3{background:linear-gradient(90deg,rgba(185,119,63,.13),transparent 62%);border-radius:9px}
+.rank-row .t{flex:1;font-weight:800;letter-spacing:-.3px;color:#1d2b3f}
+.rank-row.r1 .t{font-size:14px}
+.rank-row .v{font-weight:800;color:#8a6a12;font-variant-numeric:tabular-nums;font-size:12px}
+.empty{text-align:center;padding:30px 10px;color:#a8977a;font-size:13px;font-weight:600;line-height:1.8}
+.cand-label{display:flex;align-items:center;gap:6px;margin:10px 0 4px;padding:6px 10px;background:rgba(212,175,55,.14);border:1px solid rgba(168,130,31,.4);border-radius:999px;font-size:11px;font-weight:900;color:#8a6a12;white-space:nowrap}
+.cand-label .spark{font-size:12px;animation:flash 1.6s ease-in-out infinite}
+@keyframes flash{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(1.18)}}
+.rank-row.cand{background:none;font-size:12px;padding:6px 4px}
+.rank-row.cand .tro{width:24px}
+.rank-row.cand .tro .ic{font-size:14px;opacity:.5}
+.rank-row.cand .rk{background:#d9cdb2;bottom:-3px;min-width:14px;height:14px;font-size:9px}
+.rank-row.cand .t{font-weight:600;color:#9b8c70;font-size:12px}
+.rank-row.cand .v{color:#b3a88c;font-weight:600;font-size:11px}
+.btn{
+  background:linear-gradient(135deg,#d4af37,#a8821f);color:#2b2005;border:0;border-radius:999px;
+  padding:8px 17px;font-size:12px;font-weight:900;cursor:pointer;font-family:inherit;
+  box-shadow:0 5px 14px rgba(0,0,0,.35);transition:transform .15s ease,box-shadow .15s ease;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.45)}
+.btn:disabled{opacity:.6;cursor:default;transform:none}
+footer{margin-top:30px;text-align:center;color:rgba(212,175,55,.75);font-size:11.5px;font-weight:800;letter-spacing:.5px}
+
+@media(max-width:900px){
+  .cards,.rank-grid,.tgrid{grid-template-columns:1fr}
+  .corner{display:none}
+  .status{flex-direction:column;gap:12px;padding:18px 24px}
+  .status .divider{display:none}
+  .status .right{text-align:center}
+  .status .val{font-size:40px}
+  .tagline .bar{display:none}
+  .tagline .seg{padding:3px 10px}
+  .howto{flex-direction:column;gap:10px}
+  .howto .body{font-size:15px;line-height:1.7}
+  .howto .body .sl{display:block;height:0;overflow:hidden;margin:3px 0}
+}
+</style>
+</head>
+<body>
+
+<div class="snow" id="snow"></div>
+
+<svg class="ground" viewBox="0 0 1400 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 64 C 150 40, 260 82, 420 58 C 580 34, 700 78, 860 56 C 1020 34, 1150 80, 1400 52 L 1400 120 L 0 120 Z" fill="#f2f7ff" opacity=".10"/>
+  <path d="M0 82 C 180 60, 300 98, 470 76 C 640 54, 760 96, 930 74 C 1100 52, 1230 96, 1400 70 L 1400 120 L 0 120 Z" fill="#f2f7ff" opacity=".14"/>
+</svg>
+
+<svg class="garland" viewBox="0 0 1400 94" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 10 Q 175 74 350 18 Q 525 74 700 18 Q 875 74 1050 18 Q 1225 74 1400 10"
+        stroke="#1c7a52" stroke-width="3.5" fill="none"/>
+  <g id="bulbs"></g>
+</svg>
+
+<svg class="corner tl" viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="#14543a" stroke-width="7" stroke-linecap="round" fill="none">
+    <path d="M-10 18 C 60 26, 130 56, 196 104"/>
+    <path d="M18 8 C 54 44, 92 78, 150 104"/>
+  </g>
+  <g stroke="#1c7a52" stroke-width="4.5" stroke-linecap="round" fill="none" opacity=".95">
+    <path d="M20 26 L 2 6 M44 38 L 28 14 M70 52 L 56 26 M98 66 L 86 40 M126 82 L 116 54 M152 96 L 144 68"/>
+    <path d="M24 22 L 8 44 M50 34 L 36 58 M76 48 L 64 72 M104 62 L 94 88 M132 78 L 124 104"/>
+  </g>
+  <g fill="#b02a2a">
+    <circle cx="62" cy="46" r="6"/><circle cx="76" cy="54" r="5"/><circle cx="68" cy="60" r="4.5"/>
+    <circle cx="134" cy="86" r="5.5"/><circle cx="146" cy="93" r="4.5"/>
+  </g>
+  <path d="M0 0 L 118 0 L 0 118 Z" fill="#14543a" opacity=".5"/>
+  <path d="M0 0 L 150 0 M0 0 L 0 150" stroke="#d4af37" stroke-width="3" fill="none"/>
+  <path d="M14 0 L 118 0 M0 14 L 0 118" stroke="#f0d98c" stroke-width="1.2" fill="none" opacity=".8"/>
+</svg>
+<svg class="corner tr" viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0 L 130 0 L 0 130 Z" fill="#14543a" opacity=".55"/>
+  <path d="M0 0 L 160 0 M0 0 L 0 160" stroke="#d4af37" stroke-width="3" fill="none"/>
+  <g transform="translate(60,34)">
+    <path d="M0 26 C -34 2, -16 -22, 0 2 C 16 -22, 34 2, 0 26 Z" fill="#d4af37"/>
+    <path d="M0 26 C -34 2, -16 -22, 0 2 C 16 -22, 34 2, 0 26 Z" fill="none" stroke="#a8821f" stroke-width="1.5"/>
+    <rect x="-7" y="22" width="14" height="13" rx="3" fill="#f0d98c"/>
+    <path d="M-10 50 L -4 34 M10 50 L 4 34" stroke="#d4af37" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>
+<svg class="corner bl" viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
+  <g fill="#14543a" stroke="#1c7a52" stroke-width="2">
+    <path d="M100 18 L 148 92 L 52 92 Z"/>
+    <path d="M100 58 L 162 146 L 38 146 Z"/>
+    <path d="M100 100 L 176 202 L 24 202 Z"/>
+  </g>
+  <rect x="88" y="200" width="24" height="30" rx="3" fill="#7a4a1c"/>
+  <path d="M100 4 l7 15 16 2 -12 11 3 16 -14 -8 -14 8 3 -16 -12 -11 16 -2z" fill="#f0d98c" stroke="#d4af37" stroke-width="1.5"/>
+  <g>
+    <circle cx="86" cy="78" r="5.5" fill="#b02a2a"/><circle cx="118" cy="82" r="5" fill="#d4af37"/>
+    <circle cx="72" cy="128" r="5.5" fill="#d4af37"/><circle cx="104" cy="124" r="5" fill="#b02a2a"/><circle cx="134" cy="136" r="5" fill="#e8e8e8"/>
+    <circle cx="60" cy="184" r="6" fill="#b02a2a"/><circle cx="96" cy="176" r="5.5" fill="#f0d98c"/><circle cx="136" cy="188" r="5.5" fill="#d4af37"/>
+  </g>
+  <g stroke="#f0d98c" stroke-width="1.6" fill="none" opacity=".85">
+    <path d="M58 92 C 86 102, 114 86, 146 96"/>
+    <path d="M42 146 C 78 158, 118 140, 160 150"/>
+  </g>
+  <!-- 작은 트리 -->
+  <g transform="translate(196,104) scale(.56)">
+    <g fill="#14543a" stroke="#1c7a52" stroke-width="2.5">
+      <path d="M60 10 L 98 68 L 22 68 Z"/><path d="M60 46 L 112 118 L 8 118 Z"/><path d="M60 84 L 124 172 L -4 172 Z"/>
+    </g>
+    <rect x="50" y="170" width="20" height="26" rx="3" fill="#7a4a1c"/>
+    <path d="M60 0 l6 13 14 2 -10 10 3 14 -13 -7 -13 7 3 -14 -10 -10 14 -2z" fill="#f0d98c"/>
+    <g><circle cx="48" cy="58" r="5" fill="#b02a2a"/><circle cx="76" cy="104" r="5" fill="#d4af37"/><circle cx="40" cy="150" r="5.5" fill="#e8e8e8"/><circle cx="88" cy="146" r="5" fill="#b02a2a"/></g>
+  </g>
+  <!-- 눈사람 -->
+  <g transform="translate(252,150)">
+    <circle cx="0" cy="56" r="26" fill="#f4f8ff"/>
+    <circle cx="0" cy="22" r="19" fill="#f8fbff"/>
+    <circle cx="0" cy="-8" r="14" fill="#fdfeff"/>
+    <path d="M-15 -16 h30 v-5 h-30 z M-11 -21 h22 v-13 h-22 z" fill="#1d2b3f"/>
+    <path d="M-15 -16 h30" stroke="#b02a2a" stroke-width="4" fill="none"/>
+    <g fill="#1d2b3f"><circle cx="-5" cy="-11" r="2.1"/><circle cx="5" cy="-11" r="2.1"/><circle cx="0" cy="16" r="2.2"/><circle cx="0" cy="26" r="2.2"/></g>
+    <path d="M0 -6 l9 3 -9 3z" fill="#e07b25"/>
+    <g stroke="#7a4a1c" stroke-width="3" stroke-linecap="round"><path d="M-18 20 L -34 8 M-30 12 L -36 4 M18 20 L 34 8 M30 12 L 36 4"/></g>
+  </g>
+</svg>
+<svg class="corner br" viewBox="0 0 220 200" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <rect x="18" y="104" width="84" height="76" rx="6" fill="#14543a" stroke="#1c7a52" stroke-width="2"/>
+    <rect x="52" y="104" width="16" height="76" fill="#d4af37"/>
+    <rect x="18" y="134" width="84" height="15" fill="#d4af37"/>
+    <path d="M60 104 C 34 96, 36 74, 60 96 C 84 74, 86 96, 60 104 Z" fill="#f0d98c" stroke="#d4af37" stroke-width="1.5"/>
+  </g>
+  <g>
+    <rect x="108" y="128" width="72" height="54" rx="5" fill="#8c1f1f" stroke="#b02a2a" stroke-width="2"/>
+    <rect x="137" y="128" width="14" height="54" fill="#f0d98c"/>
+    <rect x="108" y="150" width="72" height="12" fill="#f0d98c"/>
+    <path d="M144 128 C 122 120, 124 102, 144 120 C 164 102, 166 120, 144 128 Z" fill="#d4af37" stroke="#a8821f" stroke-width="1.4"/>
+  </g>
+  <g transform="translate(166,54) rotate(14)">
+    <path d="M0 60 L 0 22 A 13 13 0 0 1 26 22" stroke="#f3f3f3" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <path d="M0 60 L 0 22 A 13 13 0 0 1 26 22" stroke="#b02a2a" stroke-width="12" fill="none" stroke-linecap="round" stroke-dasharray="7 12"/>
+  </g>
+</svg>
+
+<div class="wrap">
+
+  <header>
+    <div class="ribbon">🔔 증액금액 · 증액률 · 광고주수로 겨루는 11월 네이버 Boost League 🔔</div>
+    <h1>네이버 11월 매출 <span class="santa"><span class="g">SA</span><span class="n">N</span><span class="g">TA</span></span> 리그</h1>
+    <div class="tagline">
+      <div class="seg"><b>SA</b> 매출 올리고</div>
+      <div class="bar"></div>
+      <div class="seg"><b>NAVER</b> 사내 프로모션으로</div>
+      <div class="bar"></div>
+      <div class="seg"><b>TA</b> 풍성한 상금에 올라타!</div>
+    </div>
+  </header>
+
+  <div class="deco"><span>🎄</span><span>🔔</span><span>🎁</span><span>⛄</span><span>🦌</span></div>
+
+  <div class="howto">
+    <div class="tag">수상 방법</div>
+    <div class="body">
+      <span class="lead">네이버 SA 광고비</span><br class="brk">
+      <span class="hi">10월 대비 증액</span><span class="sl">,</span><span class="hi">11월 월초(11/1~11/8) 대비 증액<em>!</em></span>
+    </div>
+  </div>
+
+  <div class="status-wrap">
+    <div class="status">
+      <div>
+        <div class="lab">SA 프로모션 현재 달성율</div>
+        <div class="val" id="rate">–</div>
+      </div>
+      <div class="divider"></div>
+      <div class="right">
+        <div class="lab">기준일</div>
+        <div class="upd" id="upd">불러오는 중…</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note-wrap"><div class="note-box" id="note" style="display:none"></div></div>
+
+  <div class="section-title">🎄 부문별 리워드 🎁</div>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="head">
+        <div class="ico">📈</div>
+        <div>
+          <h2>증액금액 TOP 3</h2>
+          <p>전월 · 월초 대비 일평균 증액금액 기준</p>
+        </div>
+      </div>
+      <div class="body">
+        <div class="prize"><div class="medal">🥇</div><div class="info"><div class="amt">400만원</div><div class="split">팀 경비 200만 · 개인계좌지급 200만</div></div></div>
+        <div class="prize"><div class="medal">🥈</div><div class="info"><div class="amt">350만원</div><div class="split">팀 경비 175만 · 개인계좌지급 175만</div></div></div>
+        <div class="prize"><div class="medal">🥉</div><div class="info"><div class="amt">300만원</div><div class="split">팀 경비 150만 · 개인계좌지급 150만</div></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="head">
+        <div class="ico">％</div>
+        <div>
+          <h2>증액률 TOP 3</h2>
+          <p>전월 · 월초 대비 일평균 증액률 기준</p>
+        </div>
+      </div>
+      <div class="body">
+        <div class="prize"><div class="medal">🥇</div><div class="info"><div class="amt">300만원</div><div class="split">팀 경비 150만 · 개인계좌지급 150만</div></div></div>
+        <div class="prize"><div class="medal">🥈</div><div class="info"><div class="amt">250만원</div><div class="split">팀 경비 125만 · 개인계좌지급 125만</div></div></div>
+        <div class="prize"><div class="medal">🥉</div><div class="info"><div class="amt">200만원</div><div class="split">팀 경비 100만 · 개인계좌지급 100만</div></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="head">
+        <div class="ico">👥</div>
+        <div>
+          <h2>증액 광고주수 TOP 3</h2>
+          <p>일평균 5만원 &amp; 5% 이상 증액 광고주 수 (전월 · 월초)</p>
+        </div>
+      </div>
+      <div class="body">
+        <div class="prize"><div class="medal">🥇</div><div class="info"><div class="amt">200만원</div><div class="split">팀 경비 100만 · 개인계좌지급 100만</div></div></div>
+        <div class="prize"><div class="medal">🥈</div><div class="info"><div class="amt">150만원</div><div class="split">팀 경비 75만 · 개인계좌지급 75만</div></div></div>
+        <div class="prize"><div class="medal">🥉</div><div class="info"><div class="amt">100만원</div><div class="split">팀 경비 50만 · 개인계좌지급 50만</div></div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="deco"><span>🕯️</span><span>🎅</span><span>🌟</span><span>🤶</span><span>🍪</span></div>
+
+  <div class="xmas">
+    <span class="leafy">🌿</span>11월의 성과가 연말 크리스마스 선물로,<span class="santa">SANTA</span><span class="leafy">🎄</span>
+  </div>
+
+  <div class="terms">
+    <div class="chips">
+      <span class="lead">필수 조건</span>
+      <span class="chip">네이버 SA (파워링크 + 쇼핑검색광고)</span>
+      <span class="chip">대상 16팀</span>
+      <span class="chip">매체 프로모션 달성 시 조건부 지급</span>
+      <span class="chip">11월 이관 광고주 제외</span>
+    </div>
+
+    <div class="tgrid">
+
+      <div class="titem">
+        <div class="th"><span class="ti">✅</span><b>수상 자격</b></div>
+        <ul>
+          <li><em>11/9~30 일평균</em>이 <em>11/1~8 일평균</em>보다 오른 팀</li>
+          <li>전월 대비가 <span class="hl">마이너스여도 자격 유지</span></li>
+        </ul>
+      </div>
+
+      <div class="titem">
+        <div class="th"><span class="ti">📐</span><b>산정 기준</b></div>
+        <ul>
+          <li>달력일 <em>일평균</em> 기준 (주말 포함)</li>
+          <li><span class="hl">전월 대비 50%</span> + <span class="hl">월초 대비 50%</span></li>
+        </ul>
+      </div>
+
+      <div class="titem">
+        <div class="th"><span class="ti">🏅</span><b>중복 수상 불가</b></div>
+        <ul>
+          <li>증액금액 → 증액률 → 광고주수 순 배정, <em>한 팀 한 부문</em></li>
+          <li>동점 시 <span class="hl">증액금액이 높은 팀</span> 우선</li>
+        </ul>
+      </div>
+
+      <div class="titem">
+        <div class="th"><span class="ti">🤝</span><b>콜라보 광고주</b></div>
+        <ul>
+          <li>담당AE <em>배분 비율만큼</em> 팀별 반영</li>
+          <li>개인계좌지급분은 <span class="hl">팀 내 기여도</span>에 따라 분배</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="rank-wrap">
+    <div class="rank-box">
+      <div class="rank-head">
+        <h3>🥇 부문별 순위 현황</h3>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="upd" id="rank-upd">불러오는 중…</div>
+          <button id="reload" class="btn">🔄 최신 순위 불러오기</button>
+        </div>
+      </div>
+      <div class="rank-grid" id="rank-grid">
+        <div class="rank-col">
+          <div class="rc-head h1"><span class="rc-ico">📈</span><span>증액금액 TOP3</span></div>
+          <div class="rank-body"><div class="empty">불러오는 중…</div></div>
+        </div>
+        <div class="rank-col">
+          <div class="rc-head h2"><span class="rc-ico">％</span><span>증액률 TOP3</span></div>
+          <div class="rank-body"><div class="empty">불러오는 중…</div></div>
+        </div>
+        <div class="rank-col">
+          <div class="rc-head h3"><span class="rc-ico">👥</span><span>증액 광고주수 TOP3</span></div>
+          <div class="rank-body"><div class="empty">불러오는 중…</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>NAVER NOVEMBER SANTA LEAGUE · PlayD</footer>
+</div>
+
+<script>
+(function(){
+  /* 전구 */
+  const g=document.getElementById('bulbs');
+  const cols=['#e63946','#f0d98c','#2ea36c','#d4af37','#6fc3e8'];
+  const pts=[];
+  for(let x=24;x<1400;x+=38){
+    const seg=Math.floor(x/350), t=(x%350)/350;
+    const y0=(seg%2===0)?10:18, y1=18;
+    const y=(1-t)*(1-t)*(seg===0?10:18) + 2*(1-t)*t*74 + t*t*(seg===3?10:18);
+    pts.push([x,y]);
+  }
+  g.innerHTML=pts.map(([x,y],i)=>
+    `<g class="bulb" style="animation-delay:-${(i*0.17).toFixed(2)}s">
+       <line x1="${x}" y1="${y}" x2="${x}" y2="${y+7}" stroke="#1c7a52" stroke-width="2"/>
+       <ellipse cx="${x}" cy="${y+13}" rx="5" ry="7" fill="${cols[i%cols.length]}"/>
+       <ellipse cx="${x-1.6}" cy="${y+11}" rx="1.6" ry="2.4" fill="#fff" opacity=".65"/>
+     </g>`).join('');
+  /* 눈송이 글리프 */
+  const marks=['❄','❅','❆'];
+  let fl='';
+  for(let i=0;i<14;i++){
+    fl+=`<span class="flake" style="left:${(Math.random()*100).toFixed(1)}%;top:-40px;font-size:${(Math.random()*12+11).toFixed(0)}px;animation-duration:${(Math.random()*12+14).toFixed(1)}s;animation-delay:-${(Math.random()*20).toFixed(1)}s">${marks[i%3]}</span>`;
+  }
+  document.body.insertAdjacentHTML('afterbegin',fl);
+
+  const box=document.getElementById('snow');
+  let html='';
+  for(let i=0;i<46;i++){
+    const sz=(Math.random()*4+2).toFixed(1);
+    html+=`<i style="left:${(Math.random()*100).toFixed(2)}%;width:${sz}px;height:${sz}px;animation-duration:${(Math.random()*9+8).toFixed(1)}s;animation-delay:-${(Math.random()*14).toFixed(1)}s;opacity:${(Math.random()*.45+.25).toFixed(2)}"></i>`;
+  }
+  box.innerHTML=html;
+})();
+</script>
+<script>
+/* ══════════════════════════════════════════════════════════════
+   구글 스프레드시트 연동 설정  (연결 완료)
+   ──────────────────────────────────────────────────────────────
+   연결된 시트
+   https://docs.google.com/spreadsheets/d/11oMenRFp6BXnu04ph1jw7CNrCsQQReHbjy8cEitMCYE/edit?gid=400  (탭: 트래킹 입력)
+
+   ★ 시트 공유 설정 필수 ★
+   구글 시트 우측 상단 [공유] > 일반 액세스 >
+   "링크가 있는 모든 사용자" + 뷰어 로 설정해야 페이지에서 읽을 수 있습니다.
+
+   (선택) 위 설정이 사내 정책상 불가하면
+   파일 > 공유 > 웹에 게시 > CSV 로 게시한 뒤 그 주소를 PUB_CSV_URL 에 넣어주세요.
+   ══════════════════════════════════════════════════════════════ */
+const SHEET_ID  = '11oMenRFp6BXnu04ph1jw7CNrCsQQReHbjy8cEitMCYE';
+const SHEET_GID = '400';
+const PUB_CSV_URL = '';   // 웹에 게시 방식 사용할 경우에만 입력
+
+const SHEET_CSV_URL = PUB_CSV_URL ||
+  `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=${SHEET_GID}`;
+
+/* ── 시트 형식 (A: 카테고리 / B: 입력값 / C: 추가 코멘트) ──
+   카테고리                    | 입력값            | 추가 코멘트
+   업데이트 일자                | 11/9             |
+   SA 프로모션 현재 달성율        | 39%              |
+   코멘트                      | 힘내주세요!        |
+   증액금액 1등                 | 퍼포먼스마케팅2팀   | (선택) 수치·메모
+   증액금액2등 / 증액금액 3등     | …                |
+   증액금액 후보 4등 / 5등        | …                |
+   증액률 1등 / 2등 / 3등        | …                |
+   증액 광고주수 1등 / 2등 / 3등  | …                |
+   ※ 항목명 띄어쓰기는 자유롭게 써도 인식됩니다.                       */
+
+const LABELS = [
+  ['amount', '증액금액 TOP3',     '₩',  'h1'],
+  ['growth', '증액률 TOP3',       '📈', 'h2'],
+  ['clients','증액 광고주수 TOP3','👥', 'h3'],
+];
+const TROPHY = { 1:'🥇', 2:'🥈', 3:'🥉' };
+const DATA = { updated:'', rate:'', note:'',
+               amount:[], growth:[], clients:[],
+               amountC:[], growthC:[], clientsC:[] };
+
+function parseCSV(text){
+  const rows = []; let row = [], cell = '', q = false;
+  for(let i=0;i<text.length;i++){
+    const ch = text[i];
+    if(q){
+      if(ch === '"'){ if(text[i+1] === '"'){ cell += '"'; i++; } else q = false; }
+      else cell += ch;
+    } else {
+      if(ch === '"') q = true;
+      else if(ch === ','){ row.push(cell); cell = ''; }
+      else if(ch === '\n'){ row.push(cell); rows.push(row); row = []; cell = ''; }
+      else if(ch !== '\r') cell += ch;
+    }
+  }
+  if(cell !== '' || row.length){ row.push(cell); rows.push(row); }
+  return rows;
+}
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function applyRows(rows){
+  ['amount','growth','clients'].forEach(k => { DATA[k] = []; DATA[k+'C'] = []; });
+  DATA.updated = DATA.rate = DATA.note = '';
+  rows.forEach(r => {
+    const raw  = (r[0]||'').trim();
+    const key  = raw.replace(/\s/g,'');          // 띄어쓰기 무시
+    const val  = (r[1]||'').trim();
+    const memo = (r[2]||'').trim();
+    if(!key || !val) return;
+    if(key.includes('업데이트')){ DATA.updated = val; return; }
+    if(key.includes('코멘트') && !key.includes('추가')){ DATA.note = val; return; }
+    if(key.includes('달성율')){
+      if(!key.includes('GFA')) DATA.rate = val;   // GFA는 페이지에 표시하지 않음
+      return;
+    }
+    // 부문 판별
+    let sec = null;
+    if(key.includes('증액금액')) sec = 'amount';
+    else if(key.includes('증액률')) sec = 'growth';
+    else if(key.includes('광고주수')) sec = 'clients';
+    if(!sec) return;
+    const m = key.match(/(\d)등/);
+    if(!m) return;
+    const rank = parseInt(m[1], 10);
+    const isCand = key.includes('후보');
+    const item = { rank, team: val, memo };
+    (isCand ? DATA[sec+'C'] : DATA[sec]).push(item);
+  });
+  ['amount','growth','clients'].forEach(k => {
+    DATA[k].sort((a,b)=>a.rank-b.rank);
+    DATA[k+'C'].sort((a,b)=>a.rank-b.rank);
+  });
+}
+
+function render(){
+  document.getElementById('rate').textContent = DATA.rate || '집계 예정';
+  const upd = DATA.updated ? `${DATA.updated} 기준` : '11월 실적 집계 시작 후 업데이트';
+  document.getElementById('upd').textContent = upd;
+  document.getElementById('rank-upd').textContent = upd;
+  const noteEl = document.getElementById('note');
+  if(DATA.note){ noteEl.textContent = DATA.note; noteEl.style.display = 'inline-block'; }
+  else { noteEl.style.display = 'none'; }
+  document.getElementById('rank-grid').innerHTML = LABELS.map(([key,title,ico,cls])=>{
+    const list = DATA[key] || [], cand = DATA[key+'C'] || [];
+    let inner = list.length
+      ? list.map(x=>`<div class="rank-row r${x.rank}">
+           <div class="tro"><span class="ic">${TROPHY[x.rank]||'🏅'}</span><span class="rk">${x.rank}</span></div>
+           <div class="t">${esc(x.team)}</div><div class="v">${esc(x.memo)}</div></div>`).join('')
+      : '<div class="empty">11/9 이후 실적 집계가 쌓이면<br>순위가 공개됩니다</div>';
+    if(cand.length){
+      inner += '<div class="cand-label"><span class="spark">⚡</span>지금부터가 진짜 승부! TOP 3 추격권</div>' + cand.map(x=>
+        `<div class="rank-row cand">
+           <div class="tro"><span class="ic">🏅</span><span class="rk">${x.rank}</span></div>
+           <div class="t">${esc(x.team)}</div><div class="v">${esc(x.memo)}</div></div>`).join('');
+    }
+    return `<div class="rank-col">
+        <div class="rc-head ${cls}"><span class="rc-ico">${ico}</span><span>${title}</span></div>
+        <div class="rank-body">${inner}</div>
+      </div>`;
+  }).join('');
+}
+
+async function load(){
+  const btn = document.getElementById('reload');
+  btn.disabled = true; btn.textContent = '불러오는 중…';
+  const candidates = [SHEET_CSV_URL];
+  if(!PUB_CSV_URL){
+    candidates.push(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${SHEET_GID}`);
+  }
+  let ok = false;
+  for(const base of candidates){
+    try{
+      const url = base + (base.includes('?') ? '&' : '?') + 't=' + Date.now();
+      const res = await fetch(url, { cache: 'no-store' });
+      if(!res.ok) continue;
+      const text = await res.text();
+      if(/^\s*</.test(text)) continue;          // 로그인 페이지(HTML)가 오면 실패로 간주
+      applyRows(parseCSV(text));
+      ok = true; break;
+    }catch(e){ /* 다음 후보 시도 */ }
+  }
+  render();
+  if(!ok){
+    document.getElementById('rank-upd').textContent =
+      '불러오기 실패 — 구글 시트 공유를 "링크가 있는 모든 사용자"로 설정해 주세요';
+  }
+  btn.disabled = false; btn.textContent = '🔄 최신 순위 불러오기';
+}
+document.getElementById('reload').addEventListener('click', load);
+load();
+setInterval(load, 5 * 60 * 1000);   // 5분마다 자동 갱신
+</script>
+</body>
+</html>
